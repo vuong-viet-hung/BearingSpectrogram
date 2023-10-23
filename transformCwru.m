@@ -1,14 +1,63 @@
-function transformCwru(dataFolder)
-    if ~isfolder(dataFolder)
-        downloadCwru(dataFolder)
+function transformCwru(signalFolder, spectrogramFolder, subset)
+    if ~isfolder(signalFolder)
+        downloadCwru(signalFolder)
     end
-    dataFileInfos = dir(fullfile(dataFolder, "**/*.mat"));
-    for i = 1:numel(dataFileInfos)
-        dataFileInfo = dataFileInfos(i);
-        dataFileFolder = dataFileInfo.folder;
-        dataFileName = dataFileInfo.name;
-        dataFilePath = fullfile(dataFileFolder, dataFileName);
-        data = load(dataFilePath);
-        disp(data);
+    if ~isfolder(fullfile(spectrogramFolder, subset))
+        mkdir(fullfile(spectrogramFolder, subset))
+    end
+    if ~isfolder(fullfile("images/cwru", subset))
+        mkdir(fullfile("images/cwru", subset))
+    end
+    normalFileInfos = dir(fullfile(signalFolder, "Normal", "**/*.mat"));
+    faultFileInfos = dir(fullfile(signalFolder, subset, "**/*.mat"));
+    fileInfos = vertcat(normalFileInfos, faultFileInfos);
+    substrs = split(subset, '_');
+    samplingFreq = substrs(1);
+    dataEnd = substrs(2);
+    if samplingFreq == "12k"
+        samplingFreq = 12000;
+    else
+        samplingFreq = 48000;
+    end
+    rpms = [1797, 1772, 1750, 1730];
+    for i = 1:numel(fileInfos)
+        fileFolder = fileInfos(i).folder;
+        fileName = fileInfos(i).name;
+        filePath = fullfile(fileFolder, fileName);
+        data = load(filePath);
+        fieldNames = fieldnames(data);
+        signalFieldName = "";
+        for j = 1:numel(fieldNames)
+            if endsWith(fieldNames(j), dataEnd + "_time")
+                signalFieldName = strjoin(fieldNames(j), '');
+            end
+        end
+        signal = data.(signalFieldName);
+        signalShape = size(signal);
+        signalLength = signalShape(1);
+        [~, fileNameNoExt, ~] = fileparts(filePath);
+        substrs = split(fileNameNoExt, '_');
+        hp = substrs(2);
+        rpm = rpms(str2double(hp) + 1);
+        segmentLength = floorDiv(samplingFreq * 60, rpm);
+        numSegments = floorDiv(signalLength, segmentLength);
+        for k = 1:numSegments
+            segment = signal( ...
+                segmentLength * (k - 1) + 1:segmentLength * k);
+            spectrogram = cqt(segment, 'SamplingFrequency', samplingFreq);
+            segmentIdx = sprintf("%04d", k - 1);
+            spectrogramFilePath = fullfile( ...
+                spectrogramFolder, subset, ...
+                fileNameNoExt + "_" + segmentIdx + ".mat");
+            save(spectrogramFilePath, "spectrogram");
+            imageFilePath = fullfile( ...
+                "images/cwru", subset, ...
+                fileNameNoExt + "_" + segmentIdx + ".png");
+            normalizedSpectrogram = (spectrogram - min(spectrogram)) / ...
+                (max(spectrogram) - min(spectrogram));
+            resizedSpectrogram = imresize(normalizedSpectrogram, ...
+                [256, 256]);
+            imwrite(resizedSpectrogram, imageFilePath);
+        end
     end
 end
