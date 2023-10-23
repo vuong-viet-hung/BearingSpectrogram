@@ -1,1 +1,1 @@
-# CqtBearingDataset
+# SpectrogramBearingDataset
