@@ -5,9 +5,6 @@ function transformCwru(signalFolder, spectrogramFolder, subset)
     if ~isfolder(fullfile(spectrogramFolder, subset))
         mkdir(fullfile(spectrogramFolder, subset))
     end
-    if ~isfolder(fullfile("images/cwru", subset))
-        mkdir(fullfile("images/cwru", subset))
-    end
     normalFileInfos = dir(fullfile(signalFolder, "Normal", "**/*.mat"));
     faultFileInfos = dir(fullfile(signalFolder, subset, "**/*.mat"));
     fileInfos = vertcat(normalFileInfos, faultFileInfos);
@@ -50,14 +47,6 @@ function transformCwru(signalFolder, spectrogramFolder, subset)
                 spectrogramFolder, subset, ...
                 fileNameNoExt + "_" + segmentIdx + ".mat");
             save(spectrogramFilePath, "spectrogram");
-            imageFilePath = fullfile( ...
-                "images/cwru", subset, ...
-                fileNameNoExt + "_" + segmentIdx + ".png");
-            normalizedSpectrogram = (spectrogram - min(spectrogram)) / ...
-                (max(spectrogram) - min(spectrogram));
-            resizedSpectrogram = imresize(normalizedSpectrogram, ...
-                [256, 256]);
-            imwrite(resizedSpectrogram, imageFilePath);
         end
     end
 end
