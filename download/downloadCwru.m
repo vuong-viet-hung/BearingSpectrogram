@@ -1,10 +1,10 @@
-function downloadCwru(dataDir)
+function downloadCwru(dataFolder)
     url = "https://github.com/XiongMeijing/CWRU-1/archive/refs/heads/master.zip";
     zipFilePath = "CWRU-1-master.zip";
-    downloadDir = "CWRU-1-master";
+    downloadFolder = "CWRU-1-master";
     websave(zipFilePath, url);
     unzip(zipFilePath);
-    movefile(fullfile(downloadDir, "Data"), dataDir);
+    movefile(fullfile(downloadFolder, "Data"), dataFolder);
     delete(zipFilePath);
-    rmdir(downloadDir, 's');
+    rmdir(downloadFolder, 's');
 end
