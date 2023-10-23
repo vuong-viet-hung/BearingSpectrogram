@@ -6,5 +6,5 @@ function downloadCwru(signalFolder)
     unzip(zipFilePath);
     movefile(fullfile(downloadFolder, "Data"), signalFolder);
     delete(zipFilePath);
-    rmdir(downloadFolder, 's');
+    rmdir(downloadFolder, "s");
 end
