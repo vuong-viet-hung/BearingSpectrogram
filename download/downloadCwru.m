@@ -5,9 +5,6 @@ function downloadCwru(dataDir)
     websave(zipFilePath, url);
     unzip(zipFilePath);
     movefile(fullfile(downloadDir, "Data"), dataDir);
-    fileId = fopen(fullfile(dataDir, ".gitignore"), 'w');
-    fprintf(fileId, "*");
-    fclose(fileId);
     delete(zipFilePath);
     rmdir(downloadDir, 's');
 end
