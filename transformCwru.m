@@ -26,14 +26,14 @@ function transformCwru(signalFolder, spectrogramFolder, subset)
         signalFieldName = "";
         for j = 1:numel(fieldNames)
             if endsWith(fieldNames(j), dataEnd + "_time")
-                signalFieldName = strjoin(fieldNames(j), '');
+                signalFieldName = strjoin(fieldNames(j), "");
             end
         end
         signal = data.(signalFieldName);
         signalShape = size(signal);
         signalLength = signalShape(1);
         [~, fileNameNoExt, ~] = fileparts(filePath);
-        substrs = split(fileNameNoExt, '_');
+        substrs = split(fileNameNoExt, "_");
         hp = substrs(2);
         rpm = rpms(str2double(hp) + 1);
         segmentLength = floorDiv(samplingFreq * 60, rpm);
@@ -41,7 +41,7 @@ function transformCwru(signalFolder, spectrogramFolder, subset)
         for k = 1:numSegments
             segment = signal( ...
                 segmentLength * (k - 1) + 1:segmentLength * k);
-            spectrogram = cqt(segment, 'SamplingFrequency', samplingFreq);
+            spectrogram = cqt(segment, "SamplingFrequency", samplingFreq);
             segmentIdx = sprintf("%04d", k - 1);
             spectrogramFilePath = fullfile( ...
                 spectrogramFolder, subset, ...
