@@ -9,12 +9,12 @@ function transformCwru(signalFolder, spectrogramFolder, subset)
     faultFileInfos = dir(fullfile(signalFolder, subset, "**/*.mat"));
     fileInfos = vertcat(normalFileInfos, faultFileInfos);
     substrs = split(subset, '_');
-    samplingFreq = substrs(1);
+    samplingRate = substrs(1);
     dataEnd = substrs(2);
-    if samplingFreq == "12k"
-        samplingFreq = 12000;
+    if samplingRate == "12k"
+        samplingRate = 12000;
     else
-        samplingFreq = 48000;
+        samplingRate = 48000;
     end
     rpms = [1797, 1772, 1750, 1730];
     for i = 1:numel(fileInfos)
@@ -36,12 +36,12 @@ function transformCwru(signalFolder, spectrogramFolder, subset)
         substrs = split(fileNameNoExt, "_");
         hp = substrs(2);
         rpm = rpms(str2double(hp) + 1);
-        segmentLength = floorDiv(samplingFreq * 60, rpm);
+        segmentLength = floorDiv(samplingRate * 60, rpm);
         numSegments = floorDiv(signalLength, segmentLength);
         for k = 1:numSegments
             segment = signal( ...
                 segmentLength * (k - 1) + 1:segmentLength * k);
-            spectrogram = cqt(segment, "SamplingFrequency", samplingFreq);
+            spectrogram = cqt(segment, "SamplingFrequency", samplingRate);
             segmentIdx = sprintf("%04d", k - 1);
             spectrogramFilePath = fullfile( ...
                 spectrogramFolder, subset, ...
