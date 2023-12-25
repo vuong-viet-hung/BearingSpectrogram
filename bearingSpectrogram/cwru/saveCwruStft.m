@@ -14,6 +14,6 @@ function saveCwruStft(signalDir, stftDir)
         rpm = rpms(hp + 1);
         segmentLength = computeSegmentLength(samplingFrequency, rpm);
         saveDir = fullfile(stftDir, fileName);
-        saveStft(signal, segmentLength, samplingFrequency, saveDir);
+        saveStft(signal, segmentLength, saveDir);
     end
 end

@@ -14,6 +14,6 @@ function saveCwruCqt(signalDir, cqtDir)
         rpm = rpms(hp + 1);
         segmentLength = computeSegmentLength(samplingFrequency, rpm);
         saveDir = fullfile(cqtDir, fileName);
-        saveCqt(signal, segmentLength, samplingFrequency, saveDir);
+        saveCqt(signal, segmentLength, saveDir);
     end
 end
