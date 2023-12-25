@@ -1,5 +1,5 @@
 function [pxMean, pxStd, pxMin, pxMax] = computeStats(cfsDir)
-    cfsFiles = listDir(fullfile(cfsDir, "*.mat"));
+    cfsFiles = listDir(fullfile(cfsDir, "**/*.mat"));
     pxMin = inf;
     pxMax = -inf;
     pxSum = 0.0;
