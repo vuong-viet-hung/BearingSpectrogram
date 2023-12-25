@@ -1,5 +1,5 @@
 function saveCwruCfs(signalDir, cfsDir)
-    splits = ["train", "test", "val"];
+    splits = ["all", "train", "val"];
     for i = 1:numel(splits)
         subdir = fullfile(cfsDir, splits(i));
         if ~isfolder(subdir)
