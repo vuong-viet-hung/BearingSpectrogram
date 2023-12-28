@@ -1,14 +1,14 @@
 function saveHustSpectrograms(signalDir, spectrogramDir)
     downloadTo(signalDir);
 
-    signalFiles = listHustDir(signalDir);
+    files = listHustDir(signalDir);
     samplingFreq = 51200;
     
-    for i = 1:length(signalFiles)
-        [~, fileName, ~] = fileparts(signalFiles(i));
+    for i = 1:length(files)
+        [~, fileName, ~] = fileparts(files(i));
         fprintf("Processing: %s.mat\n", fileName);
         
-        [signal, shaftFreq] = loadSignal(signalFiles(i));
+        [signal, shaftFreq] = loadSignal(files(i));
         segmentLength = ceilDiv(samplingFreq, shaftFreq);
         saveDir = fullfile(spectrogramDir, fileName);
         saveSpectrograms(signal, segmentLength, saveDir);
