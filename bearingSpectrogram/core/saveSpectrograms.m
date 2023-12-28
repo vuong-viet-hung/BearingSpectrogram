@@ -13,6 +13,3 @@ function saveSpectrograms(signal, segmentLength, saveDir)
         save(file, "spec");
     end
 end
-
-
-
