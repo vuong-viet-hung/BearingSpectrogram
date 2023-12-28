@@ -1,4 +1,4 @@
-function saveCwruCqt(signalDir, cqtDir)
+function saveCwruSpectrograms(signalDir, cqtDir)
     normalFiles = listDir(fullfile(signalDir, "Normal", "*.mat"));
     faultFiles = listDir(fullfile(signalDir, "12k_DE", "*.mat"));
     signalFiles = vertcat([normalFiles, faultFiles]);
