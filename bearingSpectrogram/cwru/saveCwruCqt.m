@@ -12,7 +12,7 @@ function saveCwruCqt(signalDir, cqtDir)
         subStrs = split(fileName, "_");
         hp = str2double(subStrs(2));
         rpm = rpms(hp + 1);
-        segmentLength = computeSegmentLength(samplingFrequency, rpm);
+        segmentLength = ceilDiv(samplingFrequency * 60, rpm);
         saveDir = fullfile(cqtDir, fileName);
         saveCqt(signal, segmentLength, saveDir);
     end
