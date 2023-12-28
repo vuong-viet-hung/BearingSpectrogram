@@ -9,7 +9,7 @@ function saveCwruSpectrograms(signalDir, spectrogramDir)
         signal = loadCwruSignal(signalFiles(i));
         [~, fileName, ~] = fileparts(signalFiles(i));
         fprintf("Processing: %s.mat\n", fileName);
-        % To extract RPM from file name
+        % To extract hp from file name
         subStr = split(fileName, "_");
         hp = str2double(subStr(2));
         rpm = rpms(hp + 1);
