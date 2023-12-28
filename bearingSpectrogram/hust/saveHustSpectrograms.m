@@ -2,7 +2,7 @@ function saveHustSpectrograms(signalDir, spectrogramDir)
     signalFiles = listDir(fullfile(signalDir, "*.mat"));
     samplingFrequency = 51200;
     
-    for i = 1:numel(signalFiles)
+    for i = 1:length(signalFiles)
         [signal, shaftFrequency] = loadHustSignal(signalFiles(i));
         [~, fileName, ~] = fileparts(signalFiles(i));
         fprintf("Processing: %s.mat\n", fileName);

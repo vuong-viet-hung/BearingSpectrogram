@@ -5,10 +5,11 @@ function saveCwruSpectrograms(signalDir, spectrogramDir)
     samplingFrequency = 12000;
     rpms = [1797, 1772, 1750, 1730];
     
-    for i = 1:numel(signalFiles)
+    for i = 1:length(signalFiles)
         signal = loadCwruSignal(signalFiles(i));
         [~, fileName, ~] = fileparts(signalFiles(i));
         fprintf("Processing: %s.mat\n", fileName);
+        % To extract RPM from file name
         subStr = split(fileName, "_");
         hp = str2double(subStr(2));
         rpm = rpms(hp + 1);
