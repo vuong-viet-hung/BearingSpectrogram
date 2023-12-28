@@ -9,7 +9,7 @@ function saveCwruSpectrograms(signalDir, spectrogramDir)
         fprintf("Processing: %s.mat\n", fileName);
 
         signal = loadSignal(files(i));
-        
+
         shaftFreq = shaftFreqFrom(fileName);
         segmentLength = ceilDiv(samplingFreq, shaftFreq);
         saveDir = fullfile(spectrogramDir, fileName);
@@ -30,6 +30,7 @@ function downloadTo(signalDir)
     websave(downloadFile, downloadUrl);
     unzip(downloadFile);
     movefile(fullfile(extractDir, "Data"), signalDir);
+    
     delete(downloadFile);
     rmdir(extractDir, "s");
 end
@@ -59,6 +60,7 @@ function shaftFreq = shaftFreqFrom(fileName)
     hps = ["0", "1", "2", "3"];
     rpms = [1797, 1772, 1750, 1730];
     hpToRpm = containers.Map(hps, rpms);
+
     subStrs = split(fileName, "_");
     hp = subStrs(2);
     rpm = hpToRpm(hp);

@@ -9,7 +9,7 @@ function saveHustSpectrograms(signalDir, spectrogramDir)
         fprintf("Processing: %s.mat\n", fileName);
         
         [signal, shaftFreq] = loadSignal(files(i));
-        
+
         segmentLength = ceilDiv(samplingFreq, shaftFreq);
         saveDir = fullfile(spectrogramDir, fileName);
         saveSpectrograms(signal, segmentLength, saveDir);
@@ -29,6 +29,7 @@ function downloadTo(signalDir)
     websave(downloadFile, downloadUrl);
     unzip(downloadFile);
     movefile(fullfile(extractDir, "HUST bearing dataset"), signalDir);
+    
     delete(downloadFile);
     rmdir(extractDir, "s");
 end
