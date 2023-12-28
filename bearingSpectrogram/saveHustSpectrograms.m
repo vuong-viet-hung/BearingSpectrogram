@@ -18,7 +18,7 @@ end
 
 
 function downloadTo(signalDir)
-    if ~isfolder(signalDir)
+    if isfolder(signalDir)
         return
     end
 
