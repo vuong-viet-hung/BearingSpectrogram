@@ -9,6 +9,7 @@ function saveCwruSpectrograms(signalDir, spectrogramDir)
         fprintf("Processing: %s.mat\n", fileName);
 
         signal = loadSignal(files(i));
+        
         shaftFreq = shaftFreqFrom(fileName);
         segmentLength = ceilDiv(samplingFreq, shaftFreq);
         saveDir = fullfile(spectrogramDir, fileName);
