@@ -22,11 +22,12 @@ function downloadTo(signalDir)
     if ~isfolder(signalDir)
         return
     end
-    
+
     downloadUrl = "https://github.com/XiongMeijing/CWRU-1/archive/refs/heads/master.zip";
     downloadFile = "CWRU-1-master.zip";
     extractDir = "CWRU-1-master";
 
+    fprintf("Downloading to: %s", signalDir);
     websave(downloadFile, downloadUrl);
     unzip(downloadFile);
     movefile(fullfile(extractDir, "Data"), signalDir);
