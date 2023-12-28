@@ -1,4 +1,4 @@
-function saveCwruSpectrograms(signalDir, cqtDir)
+function saveCwruSpectrograms(signalDir, spectrogramDir)
     normalFiles = listDir(fullfile(signalDir, "Normal", "*.mat"));
     faultFiles = listDir(fullfile(signalDir, "12k_DE", "*.mat"));
     signalFiles = vertcat([normalFiles, faultFiles]);
@@ -13,7 +13,7 @@ function saveCwruSpectrograms(signalDir, cqtDir)
         hp = str2double(subStr(2));
         rpm = rpms(hp + 1);
         segmentLength = ceilDiv(samplingFrequency * 60, rpm);
-        saveDir = fullfile(cqtDir, fileName);
-        saveCqt(signal, segmentLength, saveDir);
+        saveDir = fullfile(spectrogramDir, fileName);
+        saveSpectrograms(signal, segmentLength, saveDir);
     end
 end

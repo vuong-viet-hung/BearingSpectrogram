@@ -1,4 +1,4 @@
-function saveHustCqt(signalDir, cqtDir)
+function saveHustSpectrograms(signalDir, spectrogramDir)
     signalFiles = listDir(fullfile(signalDir, "*.mat"));
     samplingFrequency = 51200;
     
@@ -7,7 +7,7 @@ function saveHustCqt(signalDir, cqtDir)
         [~, fileName, ~] = fileparts(signalFiles(i));
         fprintf("Processing: %s.mat\n", fileName);
         segmentLength = ceilDiv(samplingFrequency, shaftFrequency);
-        saveDir = fullfile(cqtDir, fileName);
-        saveCqt(signal, segmentLength, saveDir);
+        saveDir = fullfile(spectrogramDir, fileName);
+        saveSpectrograms(signal, segmentLength, saveDir);
     end
 end
