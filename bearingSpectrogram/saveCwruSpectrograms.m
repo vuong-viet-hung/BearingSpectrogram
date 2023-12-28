@@ -23,7 +23,7 @@ function downloadTo(signalDir)
     downloadFile = "CWRU-1-master.zip";
     extractDir = "CWRU-1-master";
 
-    if ~isfolder(extractDir)
+    if ~isfolder(signalDir)
         return
     end
 

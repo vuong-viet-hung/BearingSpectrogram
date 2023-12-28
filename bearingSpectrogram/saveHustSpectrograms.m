@@ -22,7 +22,7 @@ function downloadTo(signalDir)
     downloadFile = "HUST bearing a practical dataset for ball bearing fault diagnosis.zip";
     extractDir = "HUST bearing a practical dataset for ball bearing fault diagnosis";
 
-    if ~isfolder(extractDir)
+    if ~isfolder(signalDir)
         return
     end
 
