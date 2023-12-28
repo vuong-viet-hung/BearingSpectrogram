@@ -27,7 +27,7 @@ function downloadTo(signalDir)
     downloadFile = "CWRU-1-master.zip";
     extractDir = "CWRU-1-master";
 
-    fprintf("Downloading to: %s", signalDir);
+    fprintf("Downloading to: %s\n", signalDir);
     websave(downloadFile, downloadUrl);
     unzip(downloadFile);
     movefile(fullfile(extractDir, "Data"), signalDir);

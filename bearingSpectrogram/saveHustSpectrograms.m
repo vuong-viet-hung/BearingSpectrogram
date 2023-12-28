@@ -26,7 +26,7 @@ function downloadTo(signalDir)
     downloadFile = "HUST bearing a practical dataset for ball bearing fault diagnosis.zip";
     extractDir = "HUST bearing a practical dataset for ball bearing fault diagnosis";
 
-    fprintf("Downloading to: %s", signalDir);
+    fprintf("Downloading to: %s\n", signalDir);
     websave(downloadFile, downloadUrl);
     unzip(downloadFile);
     movefile(fullfile(extractDir, "HUST bearing dataset"), signalDir);
