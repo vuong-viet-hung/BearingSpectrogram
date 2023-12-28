@@ -1,5 +1,5 @@
-function [signal, shaftFrequency] = loadHustSignal(dataFilePath)
+function [signal, shaftFreq] = loadHustSignal(dataFilePath)
     data = load(dataFilePath);
     signal = data.data;
-    shaftFrequency = data.fs;
+    shaftFreq = data.fs;
 end
