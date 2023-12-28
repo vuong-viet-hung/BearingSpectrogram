@@ -19,13 +19,13 @@ end
 
 
 function downloadTo(signalDir)
-    downloadUrl = "https://github.com/XiongMeijing/CWRU-1/archive/refs/heads/master.zip";
-    downloadFile = "CWRU-1-master.zip";
-    extractDir = "CWRU-1-master";
-
     if ~isfolder(signalDir)
         return
     end
+    
+    downloadUrl = "https://github.com/XiongMeijing/CWRU-1/archive/refs/heads/master.zip";
+    downloadFile = "CWRU-1-master.zip";
+    extractDir = "CWRU-1-master";
 
     websave(downloadFile, downloadUrl);
     unzip(downloadFile);
