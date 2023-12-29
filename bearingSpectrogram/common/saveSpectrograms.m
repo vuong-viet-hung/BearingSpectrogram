@@ -9,7 +9,7 @@ function saveSpectrograms(signal, segmentLength, saveDir)
         spec = computeSpectrogram(segment);
         file = fullfile(saveDir, sprintf("%04d.mat", i - 1));
         % Save spectrogram as it's computed on one segment for memory
-        % suffieciency.
+        % suffieciency
         save(file, "spec");
     end
 end
