@@ -48,7 +48,7 @@ function signal = loadSignal(dataFilePath)
     data = load(dataFilePath);
     fieldNames = fieldnames(data);
     signalFieldName = "";
-    for i = 1:numel(fieldNames)
+    for i = 1:length(fieldNames)
         if endsWith(fieldNames(i), "DE_time")
             signalFieldName = strjoin(fieldNames(i), "");
         end
