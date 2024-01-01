@@ -40,7 +40,7 @@ end
 function files = listCwruDir(signalDir)
     normalFiles = listDir(fullfile(signalDir, "Normal", "*.mat"));
     faultFiles = listDir(fullfile(signalDir, "12k_DE", "*.mat"));
-    files = vertcat([normalFiles, faultFiles]);
+    files = [normalFiles; faultFiles];
 end
 
 
