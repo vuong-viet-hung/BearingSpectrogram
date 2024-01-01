@@ -36,7 +36,6 @@ function downloadTo(signalDir)
 end
 
 
-
 function files = listHustDir(signalDir)
     files = listDir(fullfile(signalDir, "*.mat"));
 end
