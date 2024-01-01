@@ -6,4 +6,5 @@ function files = listDir(name)
         fileName = listing(i).name;
         files(i) = fullfile(fileDir, fileName);
     end
+    files = files';
 end

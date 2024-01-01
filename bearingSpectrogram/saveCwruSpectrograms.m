@@ -40,7 +40,7 @@ end
 function files = listCwruDir(signalDir)
     normalFiles = listDir(fullfile(signalDir, "Normal", "*.mat"));
     faultFiles = listDir(fullfile(signalDir, "12k_DE", "*.mat"));
-    files = [normalFiles; faultFiles];
+    files = [normalFiles faultFiles];
 end
 
 
@@ -58,8 +58,8 @@ end
 
 
 function shaftFreq = shaftFreqFrom(fileName)
-    hps = ["0", "1", "2", "3"];
-    rpms = [1797, 1772, 1750, 1730];
+    hps = ["0" "1" "2" "3"];
+    rpms = [1797 1772 1750 1730];
     hpToRpm = containers.Map(hps, rpms);
 
     subStrs = split(fileName, "_");
