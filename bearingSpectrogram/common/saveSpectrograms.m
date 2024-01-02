@@ -24,10 +24,13 @@ end
 
 
 function spec = computeSpectrogram(segment)
-    spec = 10 * log10(abs(cqt(segment)));
-    specMean = mean(spec, "all");
-    specStd = std(spec, 1, "all");
-    spec = (spec - specMean) / specStd;
+    spec = abs(cqt(segment));
+    spec = convertToDb(spec);
     % Keep only the negative frequency half
     spec = spec(1:floorDiv(size(spec, 1), 2), :);
+end
+
+
+function spec = convertToDb(spec)
+    spec = 10 * log10(spec);
 end
