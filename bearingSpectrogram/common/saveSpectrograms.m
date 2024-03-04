@@ -10,7 +10,7 @@ function saveSpectrograms(signal, segmentLength, saveDir)
         file = fullfile(saveDir, sprintf("%04d.mat", i - 1));
         % Save spectrogram as it's computed on one segment for memory
         % suffieciency
-        save(file, "spec");
+        saveAs(file, spec);
     end
 end
 
@@ -33,4 +33,10 @@ end
 
 function spec = convertToDb(spec)
     spec = 10 * log10(spec);
+end
+
+
+function saveAs(file, spec)
+    data = spec;
+    save(file, "data");
 end
