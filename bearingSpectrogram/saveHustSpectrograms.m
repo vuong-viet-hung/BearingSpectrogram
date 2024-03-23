@@ -37,19 +37,7 @@ end
 
 
 function files = listHustDir(signalDir)
-    files = [ ...
-        listDir(fullfile(signalDir, "N5*.mat"))
-        listDir(fullfile(signalDir, "N6*.mat"))
-        listDir(fullfile(signalDir, "N7*.mat"))
-        listDir(fullfile(signalDir, "I5*.mat"))
-        listDir(fullfile(signalDir, "I6*.mat"))
-        listDir(fullfile(signalDir, "I7*.mat"))
-        listDir(fullfile(signalDir, "O6*.mat"))
-        listDir(fullfile(signalDir, "O5*.mat"))
-        listDir(fullfile(signalDir, "O7*.mat"))
-        listDir(fullfile(signalDir, "B5*.mat"))
-        listDir(fullfile(signalDir, "B6*.mat"))
-        listDir(fullfile(signalDir, "B7*.mat"))];
+    files = listDir(fullfile(signalDir, "*.mat"));
 end
 
 
